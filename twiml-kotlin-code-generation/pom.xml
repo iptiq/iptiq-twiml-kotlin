@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <parent>
+        <groupId>com.iptiq</groupId>
+        <artifactId>twiml-kotlin</artifactId>
+        <version>8.34.1.0</version>
+    </parent>
+    <artifactId>twiml-kotlin-code-generation</artifactId>
+
+    <modelVersion>4.0.0</modelVersion>
+
+    <name>Code Generator for Kotlin Extensions to Twilio Markup Language (TwiML)</name>
+
+    <properties>
+        <maven.deploy.skip>true</maven.deploy.skip>
+        <generatedSource.outputDirectory>${project.basedir}/../twiml-kotlin-extensions/src/main/kotlin/</generatedSource.outputDirectory>
+        <generator.description>${project.groupId}:${project.artifactId} version ${project.version}</generator.description>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.jetbrains.kotlin</groupId>
+            <artifactId>kotlin-stdlib-jdk8</artifactId>
+            <version>${kotlin.version}</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <sourceDirectory>src/main/kotlin</sourceDirectory>
+        <plugins>
+            <plugin>
+                <groupId>org.jetbrains.kotlin</groupId>
+                <artifactId>kotlin-maven-plugin</artifactId>
+                <version>${kotlin.version}</version>
+                <executions>
+                    <execution>
+                        <id>compile</id>
+                        <phase>compile</phase>
+                        <goals>
+                            <goal>compile</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <version>${source.plugin.version}</version>
+                <executions>
+                    <execution>
+                        <id>attach-sources</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
+    <profiles>
+
+        <!-- The code generator can be built against the unmodified Twilio SDK -->
+        <profile>
+            <id>default</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <dependencies>
+                <dependency>
+                    <groupId>com.twilio.sdk</groupId>
+                    <artifactId>twilio</artifactId>
+                    <version>${twilio.version}</version>
+                </dependency>
+            </dependencies>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.codehaus.gmaven</groupId>
+                        <artifactId>groovy-maven-plugin</artifactId>
+                        <version>${groovy.plugin.version}</version>
+                        <executions>
+                            <execution>
+                                <phase>process-classes</phase>
+                                <goals>
+                                    <goal>execute</goal>
+                                </goals>
+                                <configuration>
+                                    <source>
+                                        log.warn('TwiML extensions will not be regenerated')
+                                        log.warn('The \'regenerate\' profile must be used to regenerate the extensions - see the README')
+                                    </source>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+
+        <!--
+        Profile used to delete and regenerate source code in the associated module.
+        This is in a profile because otherwise my IDE constantly deletes and recreates the code.
+        -->
+        <profile>
+            <id>regenerate</id>
+            <dependencies>
+                <dependency>
+                    <groupId>com.twilio.sdk</groupId>
+                    <artifactId>twilio</artifactId>
+                    <!--
+                    NOTE: This is the Twilio SDK code recompiled locally with parameter name information - see the README
+                    The generator should be run using the recompiled SDK or else parameter names will be arg0, arg1, etc
+                    -->
+                    <version>${twilio.version}.WITH_PARAMETERS</version>
+                </dependency>
+            </dependencies>
+            <build>
+                <plugins>
+                    <!-- delete any existing generated source -->
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-clean-plugin</artifactId>
+                        <version>${clean.plugin.version}</version>
+                        <configuration>
+                            <filesets>
+                                <fileset>
+                                    <directory>${generatedSource.outputDirectory}</directory>
+                                </fileset>
+                            </filesets>
+                        </configuration>
+                    </plugin>
+                    <!-- run the generator -->
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>exec-maven-plugin</artifactId>
+                        <version>${exec.plugin.version}</version>
+                        <configuration>
+                            <mainClass>com.iptiq.twiml.codegen.TwimlCodeGeneratorKt</mainClass>
+                            <arguments>
+                                <argument>${generatedSource.outputDirectory}</argument>
+                                <argument>${generator.description}</argument>
+                            </arguments>
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <id>generate-extensions</id>
+                                <phase>process-classes</phase>
+                                <goals>
+                                    <goal>java</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
+
+</project>

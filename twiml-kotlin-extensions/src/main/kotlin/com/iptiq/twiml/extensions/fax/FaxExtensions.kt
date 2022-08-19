@@ -1,0 +1,30 @@
+/**
+ * Generated using com.iptiq:twiml-kotlin-code-generation version 8.34.1.0
+ *
+ * (C) 2022 iptiQ
+ *
+ * @author Allan Todd
+ */
+package com.iptiq.twiml.extensions.fax
+
+import com.iptiq.twiml.extensions.shared.*
+import com.twilio.twiml.FaxResponse
+import com.twilio.twiml.GenericNode
+import com.twilio.twiml.fax.Receive
+
+typealias FaxResponseBlock = FaxResponse.Builder.() -> Unit
+typealias GenericNodeBlock = GenericNode.Builder.() -> Unit
+typealias ReceiveBlock = Receive.Builder.() -> Unit
+
+//
+// com.twilio.twiml.FaxResponse
+//
+fun faxResponse(block: FaxResponseBlock = {}): FaxResponse = FaxResponse.Builder().apply(block).build()
+fun FaxResponse.Builder.addChild(tag: String, block: GenericNodeBlock = {}) = this.apply { addChild(buildGenericNode(tag, block)) }
+fun FaxResponse.Builder.receive(block: ReceiveBlock = {}) = this.apply { receive(buildReceive(block)) }
+
+//
+// com.twilio.twiml.fax.Receive
+//
+fun buildReceive(block: ReceiveBlock = {}): Receive = Receive.Builder().apply(block).build()
+fun Receive.Builder.addChild(tag: String, block: GenericNodeBlock = {}) = this.apply { addChild(buildGenericNode(tag, block)) }

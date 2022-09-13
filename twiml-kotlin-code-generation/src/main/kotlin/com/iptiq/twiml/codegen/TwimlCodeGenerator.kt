@@ -43,7 +43,8 @@ private typealias ParameterList = List<Parameter>
  * Get the Builder class for the given tag class
  */
 @Suppress("UNCHECKED_CAST")
-private fun <T : TwiML> Class<T>.builderClass(): Class<TwiML.Builder<*>> = Class.forName("$name\$Builder") as Class<TwiML.Builder<*>>
+private fun <T : TwiML> Class<T>.builderClass(): Class<TwiML.Builder<*>> =
+    Class.forName("$name\$Builder") as Class<TwiML.Builder<*>>
 
 /**
  * Test whether the given class represents a TwiML tag
@@ -52,6 +53,7 @@ private fun Class<*>.isTwimlTag() = !isEnum && name.startsWith(TWIML_PACKAGE)
 
 @Suppress("UNCHECKED_CAST")
 private fun Class<*>.twimlType() = this as Class<out TwiML>
+
 /**
  * Find all the tag classes which may be nested under this one
  */
@@ -153,14 +155,14 @@ private fun generateExtensionCode(
     //
     writer.println(
         """
-            /**
-             * Generated using $generatorDescription
-             *
-             * (C) ${LocalDate.now().year} $COPYRIGHT_HOLDER
-             *
-             * @author $AUTHOR
-             */
-        """.trimIndent()
+            |/**
+            | * Generated using $generatorDescription
+            | *
+            | * (C) ${LocalDate.now().year} $COPYRIGHT_HOLDER
+            | *
+            | * @author $AUTHOR
+            | */
+        """.trimMargin()
     )
     //
     // Package declaration
@@ -194,10 +196,6 @@ private fun generateExtensionCode(
     }
 
     tagClasses.filter { it !in excludedSharedTags }.forEach { tagClass ->
-        writer.println()
-        writer.println("//")
-        writer.println("// ${tagClass.name}")
-        writer.println("//")
         //
         // Functions used to create the types.
         //
@@ -210,13 +208,22 @@ private fun generateExtensionCode(
             val topLevel = (tagClass == parentTagClass) && (sharedImport != null)
 
             // build functions for nested tags are prefixed with build to prevent confusion with functions used to add these tags
-            val functionName = if (topLevel) tagClass.simpleName.replaceFirstChar { it.lowercase() } else tagClass.buildFunctionName()
+            val functionName =
+                if (topLevel) tagClass.simpleName.replaceFirstChar { it.lowercase() } else tagClass.buildFunctionName()
             val parameters = paramList.asFunctionParameters(tagClass, true)
             val returnType = tagClass.simpleName
             val builderConstructorArgs = paramList.asArguments()
             val functionBody = "${tagClass.simpleName}.Builder($builderConstructorArgs).apply(block).build()"
-            writer.println("fun $functionName($parameters): $returnType = $functionBody")
-
+            writer.println(
+                """
+                |
+                |
+                |/**
+                | * Build a [${tagClass.canonicalName}]
+                | */
+                |fun $functionName($parameters): $returnType = $functionBody 
+            """.trimMargin()
+            )
         }
 
         //
@@ -242,21 +249,32 @@ private fun generateExtensionCode(
                 //
                 // If we make block optional then this function will not be called if block is not passed as the existing
                 // method will win
+
                 val existingMethod = runCatching {
                     tagClass.builderClass().getMethod(functionName, *paramTypes) // expect NoSuchMethodException
                 }.getOrNull()
-                if (existingMethod != null) {
-                    val methodDescription = with(existingMethod) {
-                        "${declaringClass.enclosingClass.simpleName}.${declaringClass.simpleName}.$name(${parameters.joinToString { "${it.name}: ${it.type.simpleName}" }})"
-                    }
-                    writer.println("/** The 'block' parameter is not optional, an attempt to call this function without 'block' would be shadowed by $methodDescription */")
-                }
 
+                val mandatoryBlockParameterNote = existingMethod?.let { m ->
+                    val methodDescription = "${m.declaringClass.enclosingClass.simpleName}.${m.declaringClass.simpleName}.${m.name}(${m.parameters.joinToString { "${it.name}: ${it.type.simpleName}" }})"
+                    """
+                    | * NOTE: The 'block' parameter is not optional, an attempt to call this function without 'block' would be shadowed by $methodDescription
+                    | *
+                    |
+                    """.trimMargin()
+                } ?: ""
                 val parameters = paramList.asFunctionParameters(typeToAdd, existingMethod == null)
                 val buildFunctionToCall = typeToAdd.buildFunctionName()
                 val builderFunctionArgs = paramList.asArgumentsWithBlock()
                 val functionBody = "this.apply { $functionName($buildFunctionToCall($builderFunctionArgs)) }"
-                writer.println("fun ${tagClass.simpleName}.Builder.$functionName($parameters) = $functionBody")
+                writer.println(
+                    """
+                    |
+                    |/**
+                    |${mandatoryBlockParameterNote} * @see ${method.declaringClass.canonicalName}.${method.name}
+                    | */
+                    |fun ${tagClass.simpleName}.Builder.$functionName($parameters) = $functionBody
+                """.trimMargin()
+                )
             }
         }
     }
@@ -266,7 +284,7 @@ private fun generateExtensionCode(
 
 fun main(args: Array<String>) {
 
-    require (args.size == 2) {"Expected exactly two arguments but received ${args.size}"}
+    require(args.size == 2) { "Expected exactly two arguments but received ${args.size}" }
 
     val sourceOutputRoot = File(args[0])
     val generatorDescription = args[1]

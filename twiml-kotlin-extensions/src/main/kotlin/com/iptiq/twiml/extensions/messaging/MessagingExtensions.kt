@@ -23,42 +23,110 @@ typealias BodyBlock = Body.Builder.() -> Unit
 typealias MediaBlock = Media.Builder.() -> Unit
 typealias RedirectBlock = Redirect.Builder.() -> Unit
 
-//
-// com.twilio.twiml.MessagingResponse
-//
-fun messagingResponse(block: MessagingResponseBlock = {}): MessagingResponse = MessagingResponse.Builder().apply(block).build()
+
+/**
+ * Build a [com.twilio.twiml.MessagingResponse]
+ */
+fun messagingResponse(block: MessagingResponseBlock = {}): MessagingResponse = MessagingResponse.Builder().apply(block).build() 
+
+/**
+ * @see com.twilio.twiml.TwiML.Builder.addChild
+ */
 fun MessagingResponse.Builder.addChild(tag: String, block: GenericNodeBlock = {}) = this.apply { addChild(buildGenericNode(tag, block)) }
+
+/**
+ * @see com.twilio.twiml.MessagingResponse.Builder.message
+ */
 fun MessagingResponse.Builder.message(block: MessageBlock = {}) = this.apply { message(buildMessage(block)) }
+
+/**
+ * @see com.twilio.twiml.MessagingResponse.Builder.message
+ */
 fun MessagingResponse.Builder.message(body: String, block: MessageBlock = {}) = this.apply { message(buildMessage(body, block)) }
+
+/**
+ * @see com.twilio.twiml.MessagingResponse.Builder.redirect
+ */
 fun MessagingResponse.Builder.redirect(url: String, block: RedirectBlock = {}) = this.apply { redirect(buildRedirect(url, block)) }
+
+/**
+ * @see com.twilio.twiml.MessagingResponse.Builder.redirect
+ */
 fun MessagingResponse.Builder.redirect(url: URI, block: RedirectBlock = {}) = this.apply { redirect(buildRedirect(url, block)) }
 
-//
-// com.twilio.twiml.messaging.Message
-//
-fun buildMessage(block: MessageBlock = {}): Message = Message.Builder().apply(block).build()
-fun buildMessage(body: String, block: MessageBlock = {}): Message = Message.Builder(body).apply(block).build()
+
+/**
+ * Build a [com.twilio.twiml.messaging.Message]
+ */
+fun buildMessage(block: MessageBlock = {}): Message = Message.Builder().apply(block).build() 
+
+
+/**
+ * Build a [com.twilio.twiml.messaging.Message]
+ */
+fun buildMessage(body: String, block: MessageBlock = {}): Message = Message.Builder(body).apply(block).build() 
+
+/**
+ * @see com.twilio.twiml.TwiML.Builder.addChild
+ */
 fun Message.Builder.addChild(tag: String, block: GenericNodeBlock = {}) = this.apply { addChild(buildGenericNode(tag, block)) }
+
+/**
+ * @see com.twilio.twiml.messaging.Message.Builder.body
+ */
 fun Message.Builder.body(message: String, block: BodyBlock = {}) = this.apply { body(buildBody(message, block)) }
+
+/**
+ * @see com.twilio.twiml.messaging.Message.Builder.media
+ */
 fun Message.Builder.media(url: String, block: MediaBlock = {}) = this.apply { media(buildMedia(url, block)) }
+
+/**
+ * @see com.twilio.twiml.messaging.Message.Builder.media
+ */
 fun Message.Builder.media(url: URI, block: MediaBlock = {}) = this.apply { media(buildMedia(url, block)) }
 
-//
-// com.twilio.twiml.messaging.Body
-//
-fun buildBody(message: String, block: BodyBlock = {}): Body = Body.Builder(message).apply(block).build()
+
+/**
+ * Build a [com.twilio.twiml.messaging.Body]
+ */
+fun buildBody(message: String, block: BodyBlock = {}): Body = Body.Builder(message).apply(block).build() 
+
+/**
+ * @see com.twilio.twiml.TwiML.Builder.addChild
+ */
 fun Body.Builder.addChild(tag: String, block: GenericNodeBlock = {}) = this.apply { addChild(buildGenericNode(tag, block)) }
 
-//
-// com.twilio.twiml.messaging.Media
-//
-fun buildMedia(url: String, block: MediaBlock = {}): Media = Media.Builder(url).apply(block).build()
-fun buildMedia(url: URI, block: MediaBlock = {}): Media = Media.Builder(url).apply(block).build()
+
+/**
+ * Build a [com.twilio.twiml.messaging.Media]
+ */
+fun buildMedia(url: String, block: MediaBlock = {}): Media = Media.Builder(url).apply(block).build() 
+
+
+/**
+ * Build a [com.twilio.twiml.messaging.Media]
+ */
+fun buildMedia(url: URI, block: MediaBlock = {}): Media = Media.Builder(url).apply(block).build() 
+
+/**
+ * @see com.twilio.twiml.TwiML.Builder.addChild
+ */
 fun Media.Builder.addChild(tag: String, block: GenericNodeBlock = {}) = this.apply { addChild(buildGenericNode(tag, block)) }
 
-//
-// com.twilio.twiml.messaging.Redirect
-//
-fun buildRedirect(url: String, block: RedirectBlock = {}): Redirect = Redirect.Builder(url).apply(block).build()
-fun buildRedirect(url: URI, block: RedirectBlock = {}): Redirect = Redirect.Builder(url).apply(block).build()
+
+/**
+ * Build a [com.twilio.twiml.messaging.Redirect]
+ */
+fun buildRedirect(url: String, block: RedirectBlock = {}): Redirect = Redirect.Builder(url).apply(block).build() 
+
+
+/**
+ * Build a [com.twilio.twiml.messaging.Redirect]
+ */
+fun buildRedirect(url: URI, block: RedirectBlock = {}): Redirect = Redirect.Builder(url).apply(block).build() 
+
+/**
+ * @see com.twilio.twiml.TwiML.Builder.addChild
+ */
 fun Redirect.Builder.addChild(tag: String, block: GenericNodeBlock = {}) = this.apply { addChild(buildGenericNode(tag, block)) }

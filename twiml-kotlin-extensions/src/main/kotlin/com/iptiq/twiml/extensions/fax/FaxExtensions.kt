@@ -16,15 +16,29 @@ typealias FaxResponseBlock = FaxResponse.Builder.() -> Unit
 typealias GenericNodeBlock = GenericNode.Builder.() -> Unit
 typealias ReceiveBlock = Receive.Builder.() -> Unit
 
-//
-// com.twilio.twiml.FaxResponse
-//
-fun faxResponse(block: FaxResponseBlock = {}): FaxResponse = FaxResponse.Builder().apply(block).build()
+
+/**
+ * Build a [com.twilio.twiml.FaxResponse]
+ */
+fun faxResponse(block: FaxResponseBlock = {}): FaxResponse = FaxResponse.Builder().apply(block).build() 
+
+/**
+ * @see com.twilio.twiml.TwiML.Builder.addChild
+ */
 fun FaxResponse.Builder.addChild(tag: String, block: GenericNodeBlock = {}) = this.apply { addChild(buildGenericNode(tag, block)) }
+
+/**
+ * @see com.twilio.twiml.FaxResponse.Builder.receive
+ */
 fun FaxResponse.Builder.receive(block: ReceiveBlock = {}) = this.apply { receive(buildReceive(block)) }
 
-//
-// com.twilio.twiml.fax.Receive
-//
-fun buildReceive(block: ReceiveBlock = {}): Receive = Receive.Builder().apply(block).build()
+
+/**
+ * Build a [com.twilio.twiml.fax.Receive]
+ */
+fun buildReceive(block: ReceiveBlock = {}): Receive = Receive.Builder().apply(block).build() 
+
+/**
+ * @see com.twilio.twiml.TwiML.Builder.addChild
+ */
 fun Receive.Builder.addChild(tag: String, block: GenericNodeBlock = {}) = this.apply { addChild(buildGenericNode(tag, block)) }

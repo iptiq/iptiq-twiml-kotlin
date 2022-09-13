@@ -12,12 +12,15 @@
     <name>Reactor Project for Kotlin Extensions to Twilio Markup Language (TwiML)</name>
 
     <properties>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
         <twilio.version>8.34.1</twilio.version>
         <kotlin.version>1.6.21</kotlin.version>
         <clean.plugin.version>3.2.0</clean.plugin.version>
         <exec.plugin.version>3.0.0</exec.plugin.version>
         <failsafe.plugin.version>3.0.0-M6</failsafe.plugin.version>
         <groovy.plugin.version>2.1.1</groovy.plugin.version>
+        <dokka.plugin.version>1.7.10</dokka.plugin.version>
         <license.plugin.version>2.0.0</license.plugin.version>
         <source.plugin.version>3.2.1</source.plugin.version>
         <!-- tests are not running with v2 surefire -->

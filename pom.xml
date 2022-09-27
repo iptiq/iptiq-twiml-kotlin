@@ -17,15 +17,17 @@
         <twilio.version>8.34.1</twilio.version>
         <kotlin.version>1.6.21</kotlin.version>
         <clean.plugin.version>3.2.0</clean.plugin.version>
-        <exec.plugin.version>3.0.0</exec.plugin.version>
-        <failsafe.plugin.version>3.0.0-M6</failsafe.plugin.version>
+        <dokka.plugin.version>1.7.10</dokka.plugin.version>
+        <exec.plugin.version>3.1.0</exec.plugin.version>
+        <failsafe.plugin.version>3.0.0-M7</failsafe.plugin.version>
         <gpg.plugin.version>3.0.1</gpg.plugin.version>
         <groovy.plugin.version>2.1.1</groovy.plugin.version>
-        <dokka.plugin.version>1.7.10</dokka.plugin.version>
+        <jacoco.plugin.version>0.8.8</jacoco.plugin.version>
         <license.plugin.version>2.0.0</license.plugin.version>
+        <nexus.staging.plugin.version>1.6.13</nexus.staging.plugin.version>
         <source.plugin.version>3.2.1</source.plugin.version>
         <!-- tests are not running with v2 surefire -->
-        <surefire.plugin.version>3.0.0-M6</surefire.plugin.version>
+        <surefire.plugin.version>3.0.0-M7</surefire.plugin.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <kotlin.code.style>official</kotlin.code.style>
         <kotlin.compiler.jvmTarget>1.8</kotlin.compiler.jvmTarget>

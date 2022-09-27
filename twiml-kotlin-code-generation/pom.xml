@@ -15,9 +15,10 @@
     <name>Code Generator for Kotlin Extensions to Twilio Markup Language (TwiML)</name>
 
     <properties>
-        <maven.deploy.skip>true</maven.deploy.skip>
         <generatedSource.outputDirectory>${project.basedir}/../twiml-kotlin-extensions/src/main/kotlin/</generatedSource.outputDirectory>
         <generator.description>${project.groupId}:${project.artifactId} version ${project.version}</generator.description>
+        <!-- don't upload this submodule to Maven Central -->
+        <skipNexusStagingDeployMojo>true</skipNexusStagingDeployMojo>
     </properties>
 
     <dependencies>

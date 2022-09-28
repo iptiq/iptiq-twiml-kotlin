@@ -12,14 +12,14 @@ Use the following dependency in Maven
 <dependency>
   <groupId>com.iptiq</groupId>
   <artifactId>twiml-kotlin-extensions</artifactId>
-  <version>8.35.0.0</version>
+  <version>8.36.0.0</version>
 </dependency>
 ```
 
 or in Gradle
 
 ```
-implementation 'com.iptiq:twiml-kotlin-extensions:8.35.0.0'
+implementation 'com.iptiq:twiml-kotlin-extensions:8.36.0.0'
 ```
 
 ## Using the Library

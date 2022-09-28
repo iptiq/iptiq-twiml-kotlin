@@ -5,14 +5,35 @@
 
     <parent>
         <groupId>com.iptiq</groupId>
-        <artifactId>twiml-kotlin</artifactId>
-        <version>8.34.1.0</version>
+        <artifactId>twiml-kotlin-parent</artifactId>
+        <version>8.35.0.0</version>
     </parent>
     <artifactId>twiml-kotlin-extensions</artifactId>
 
     <modelVersion>4.0.0</modelVersion>
 
-    <name>Kotlin Extensions to Twilio Markup Language (TwiML)</name>
+    <name>TwiML Kotlin Extensions</name>
+    <description>Kotlin Extensions to Twilio Markup Language (TwiML)</description>
+    <url>https://github.com/iptiq/iptiq-twiml-kotlin/blob/main/twiml-kotlin-extensions/README.md</url>
+    <licenses>
+        <license>
+            <name>MIT License</name>
+            <url>http://www.opensource.org/licenses/mit-license.php</url>
+        </license>
+    </licenses>
+    <scm>
+        <connection>scm:git:git://github.com/iptiq/iptiq-twiml-kotlin.git</connection>
+        <developerConnection>scm:git:ssh://github.com:iptiq/iptiq-twiml-kotlin.git</developerConnection>
+        <url>https://github.com/iptiq/iptiq-twiml-kotlin/tree/main</url>
+        <tag>8.35.0.0</tag>
+    </scm>
+    <developers>
+        <developer>
+            <name>Allan Todd</name>
+            <organization>iptiQ</organization>
+            <organizationUrl>https://www.iptiq.com</organizationUrl>
+        </developer>
+    </developers>
 
     <build>
         <sourceDirectory>src/main/kotlin</sourceDirectory>

@@ -4,12 +4,12 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>twiml-kotlin</artifactId>
+    <artifactId>twiml-kotlin-parent</artifactId>
     <groupId>com.iptiq</groupId>
-    <version>8.34.1.0</version>
+    <version>8.35.0.0</version>
     <packaging>pom</packaging>
 
-    <name>TwiML Kotlin</name>
+    <name>TwiML Kotlin Parent</name>
     <description>Parent Project for Kotlin Extensions to Twilio Markup Language (TwiML)</description>
     <url>https://github.com/iptiq/iptiq-twiml-kotlin</url>
     <licenses>
@@ -19,9 +19,10 @@
         </license>
     </licenses>
     <scm>
-        <connection>scm:git:git://github.com/iptiq/iptiq-twiml-kotlin.gitt</connection>
+        <connection>scm:git:git://github.com/iptiq/iptiq-twiml-kotlin.git</connection>
         <developerConnection>scm:git:ssh://github.com:iptiq/iptiq-twiml-kotlin.git</developerConnection>
         <url>https://github.com/iptiq/iptiq-twiml-kotlin/tree/main</url>
+        <tag>8.35.0.0</tag>
     </scm>
     <developers>
         <developer>
@@ -34,7 +35,7 @@
     <properties>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
-        <twilio.version>8.34.1</twilio.version>
+        <twilio.version>8.35.0</twilio.version>
         <kotlin.version>1.6.21</kotlin.version>
         <clean.plugin.version>3.2.0</clean.plugin.version>
         <dokka.plugin.version>1.7.10</dokka.plugin.version>

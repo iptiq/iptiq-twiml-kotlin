@@ -2,6 +2,26 @@
 
 This library allows Kotlin code to be written which is simpler than the using the Java builders from the Twilio SDK and more closely resembles the generated TwiML.
 
+## Installation
+
+twiml-kotlin-extensions is available from Maven Central.
+
+Use the following dependency in Maven
+
+```xml
+<dependency>
+  <groupId>com.iptiq</groupId>
+  <artifactId>twiml-kotlin-extensions</artifactId>
+  <version>8.35.0.0</version>
+</dependency>
+```
+
+or in Gradle
+
+```
+implementation 'com.iptiq:twiml-kotlin-extensions:8.35.0.0'
+```
+
 ## Using the Library
 * For voice
   * ```import com.iptiq.twiml.extensions.voice.*```

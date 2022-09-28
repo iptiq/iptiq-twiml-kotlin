@@ -5,14 +5,15 @@
 
     <parent>
         <groupId>com.iptiq</groupId>
-        <artifactId>twiml-kotlin</artifactId>
-        <version>8.34.1.0</version>
+        <artifactId>twiml-kotlin-parent</artifactId>
+        <version>8.35.0.0</version>
     </parent>
     <artifactId>twiml-kotlin-code-generation</artifactId>
 
     <modelVersion>4.0.0</modelVersion>
 
-    <name>Code Generator for Kotlin Extensions to Twilio Markup Language (TwiML)</name>
+    <name>TwiML Kotlin Code Generator</name>
+    <description>Code Generator for Kotlin Extensions to Twilio Markup Language (TwiML)</description>
 
     <properties>
         <generatedSource.outputDirectory>${project.basedir}/../twiml-kotlin-extensions/src/main/kotlin/</generatedSource.outputDirectory>

@@ -6,7 +6,7 @@
 
     <artifactId>twiml-kotlin-parent</artifactId>
     <groupId>com.iptiq</groupId>
-    <version>9.0.1.0</version>
+    <version>9.1.0.0</version>
     <packaging>pom</packaging>
 
     <name>TwiML Kotlin Parent</name>
@@ -22,7 +22,7 @@
         <connection>scm:git:git://github.com/iptiq/iptiq-twiml-kotlin.git</connection>
         <developerConnection>scm:git:ssh://github.com:iptiq/iptiq-twiml-kotlin.git</developerConnection>
         <url>https://github.com/iptiq/iptiq-twiml-kotlin/tree/main</url>
-        <tag>9.0.1.0</tag>
+        <tag>9.1.0.0</tag>
     </scm>
     <developers>
         <developer>
@@ -35,7 +35,7 @@
     <properties>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
-        <twilio.version>9.0.1</twilio.version>
+        <twilio.version>9.1.0</twilio.version>
         <kotlin.version>1.6.21</kotlin.version>
         <clean.plugin.version>3.2.0</clean.plugin.version>
         <dokka.plugin.version>1.7.10</dokka.plugin.version>
@@ -66,12 +66,19 @@
     <dependencyManagement>
         <dependencies>
             <dependency>
-                <!-- security issues flagged in version 2.13.3 -->
+                <!-- security issue flagged in version 2.13.4 -->
                 <!-- https://ossindex.sonatype.org/vulnerability/CVE-2022-42003 -->
-                <!-- https://ossindex.sonatype.org/vulnerability/CVE-2022-42004 -->
                 <groupId>com.fasterxml.jackson.core</groupId>
                 <artifactId>jackson-databind</artifactId>
                 <version>2.13.4.2</version>
+            </dependency>
+            <dependency>
+                <!-- security issue flagged in version 6.3.1 -->
+                <!-- https://ossindex.sonatype.org/vulnerability/CVE-2022-40152 -->
+                <!-- https://github.com/FasterXML/woodstox/blob/master/release-notes/VERSION -->
+                <groupId>com.fasterxml.woodstox</groupId>
+                <artifactId>woodstox-core</artifactId>
+                <version>6.4.0</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

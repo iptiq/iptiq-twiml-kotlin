@@ -6,7 +6,7 @@
 
     <artifactId>twiml-kotlin-parent</artifactId>
     <groupId>com.iptiq</groupId>
-    <version>9.0.0.0</version>
+    <version>9.0.1.0</version>
     <packaging>pom</packaging>
 
     <name>TwiML Kotlin Parent</name>
@@ -22,7 +22,7 @@
         <connection>scm:git:git://github.com/iptiq/iptiq-twiml-kotlin.git</connection>
         <developerConnection>scm:git:ssh://github.com:iptiq/iptiq-twiml-kotlin.git</developerConnection>
         <url>https://github.com/iptiq/iptiq-twiml-kotlin/tree/main</url>
-        <tag>9.0.0.0</tag>
+        <tag>9.0.1.0</tag>
     </scm>
     <developers>
         <developer>
@@ -35,7 +35,7 @@
     <properties>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
-        <twilio.version>9.0.0</twilio.version>
+        <twilio.version>9.0.1</twilio.version>
         <kotlin.version>1.6.21</kotlin.version>
         <clean.plugin.version>3.2.0</clean.plugin.version>
         <dokka.plugin.version>1.7.10</dokka.plugin.version>
@@ -49,6 +49,7 @@
         <source.plugin.version>3.2.1</source.plugin.version>
         <!-- tests are not running with v2 surefire -->
         <surefire.plugin.version>3.0.0-M7</surefire.plugin.version>
+        <versions.plugin.version>2.7</versions.plugin.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <kotlin.code.style>official</kotlin.code.style>
         <kotlin.compiler.jvmTarget>1.8</kotlin.compiler.jvmTarget>
@@ -61,6 +62,19 @@
         <module>twiml-kotlin-code-generation</module>
         <module>twiml-kotlin-extensions</module>
     </modules>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <!-- security issues flagged in version 2.13.3 -->
+                <!-- https://ossindex.sonatype.org/vulnerability/CVE-2022-42003 -->
+                <!-- https://ossindex.sonatype.org/vulnerability/CVE-2022-42004 -->
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-databind</artifactId>
+                <version>2.13.4.2</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 
     <build>
         <pluginManagement>
@@ -79,6 +93,11 @@
                     <groupId>org.codehaus.mojo</groupId>
                     <artifactId>license-maven-plugin</artifactId>
                     <version>${license.plugin.version}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>versions-maven-plugin</artifactId>
+                    <version>${versions.plugin.version}</version>
                 </plugin>
             </plugins>
         </pluginManagement>
@@ -146,6 +165,10 @@
                         </configuration>
                     </execution>
                 </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>versions-maven-plugin</artifactId>
             </plugin>
             <plugin>
                 <groupId>org.sonatype.plugins</groupId>

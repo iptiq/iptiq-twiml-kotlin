@@ -59,13 +59,66 @@ The TwiML produced is
 </Response>
 ```
 
+### Select Department Example
+
+Suppose we want to ask the caller to select a department.  We might use the following TwiML
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<Response>
+  <Gather action="http://gatherexample.test/select-department" numDigits="1">
+    <Say>For Sales please press 1</Say>
+    <Say>For Servicing please press 2</Say>
+    <Say>For Accounts please press 3</Say>
+  </Gather>
+  <Redirect>http://gatherexample.test/request-department</Redirect>
+</Response>
+```
+
+We create the TwiML as follows using the extension functions
+
+```kotlin
+val voiceResponse = voiceResponse {
+    gather {
+        say("For Sales please press 1")
+        say("For Servicing please press 2")
+        say("For Accounts please press 3")
+        action("http://gatherexample.test/select-department")
+        numDigits(1)
+    }
+    redirect("http://gatherexample.test/request-department")
+}
+```
+
+Using the Java builders, the code would be
+```kotlin
+val expected: VoiceResponse = VoiceResponse.Builder()
+    .gather(
+        Gather.Builder()
+            .say(
+                Say.Builder("For Sales please press 1").build()
+            )
+            .say(
+                Say.Builder("For Servicing please press 2").build()
+            )
+            .say(
+                Say.Builder("For Accounts please press 3").build()
+            )
+            .action("http://gatherexample.test/select-department")
+            .numDigits(1)
+            .build()
+    )
+    .redirect(
+        Redirect.Builder("http://gatherexample.test/request-department").build()
+    )
+    .build()
+```
+
 ### Loops and Conditions
 
-The Hello World example is nice but it saves just a few calls to `.Builder()` and `.build()`.  However, suppose we want to do something more complicated; this is where the extension functions can make our code considerably simpler and more readable.
+Considering the previous example, we might want to build the TwiML dynamically.  Here we will add two enhancements
 
-For example, let's suppose we want to prompt our caller to select a department and optionally read an error message if we are retrying owing to bad or missing input.
-
-Given this list of departments
+* We will create the `Say` tags based on a list of departments
 
 ```kotlin
 val departments = listOf(
@@ -75,21 +128,7 @@ val departments = listOf(
 )
 ```
 
-We might want to produce the following TwiML, where the first 'Say' and the 'Pause' only appear when retrying
-
-```xml
-<?xml version="1.0" encoding="UTF-8"?>
-<Response>
-  <Gather action="http://gatherexample.test/select-department" numDigits="1">
-    <Say>Your selection was not recognised.</Say>
-    <Pause length="1"/>
-    <Say>For Sales please press 1</Say>
-    <Say>For Servicing please press 2</Say>
-    <Say>For Accounts please press 3</Say>
-  </Gather>
-  <Redirect>http://gatherexample.test/select-department</Redirect>
-</Response>
-```
+* If `retry` is `true`, tell the caller the input was not recognised
 
 Using the extension functions, control flow structures may be easily embedded within the code blocks that create the TwiML
 
@@ -108,11 +147,26 @@ val voiceResponse = voiceResponse {
         action("http://gatherexample.test/select-department")
         numDigits(1)
     }
-    redirect("http://gatherexample.test/select-department")
+    redirect("http://gatherexample.test/request-department")
 }
 ```
+The code above produces the following TwiML when `retry` is `true`
 
-Whereas if we used the Java builders we might write some Kotlin code like this
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<Response>
+  <Gather action="http://gatherexample.test/select-department" numDigits="1">
+    <Say>Your selection was not recognised.</Say>
+    <Pause length="1"/>
+    <Say>For Sales please press 1</Say>
+    <Say>For Servicing please press 2</Say>
+    <Say>For Accounts please press 3</Say>
+  </Gather>
+  <Redirect>http://gatherexample.test/request-department</Redirect>
+</Response>
+```
+
+Using the Java builders, we might have written the following code
 
 ```kotlin
 val gatherBuilder = Gather.Builder()
@@ -136,9 +190,30 @@ val voiceResponse = VoiceResponse.Builder()
       .build()
   )
   .redirect(
-    Redirect.Builder("http://gatherexample.test/select-department").build()
+    Redirect.Builder("http://gatherexample.test/request-department").build()
   )
   .build()
+```
+
+## Messaging
+
+TwiML for messaging is also supported.  For example, to send a message
+
+```kotlin
+val response = messagingResponse {
+  message("Hello World!")
+}
+```
+
+or a message with an image
+
+```kotlin
+val response = messagingResponse {
+  message {
+    body("Hello World!")
+    media("https://example.test/hello.png")
+  }
+}
 ```
 
 ## How Does it Work?

@@ -11,6 +11,48 @@ import org.junit.jupiter.api.Test
 internal class GatherTest : TwimlTest() {
 
     @Test
+    fun `Gather using extensions produces the same TwiML`() {
+
+        val expected: VoiceResponse = VoiceResponse.Builder()
+            .gather(
+                Gather.Builder()
+                    .say(
+                        Say.Builder("For Sales please press 1").build()
+                    )
+                    .say(
+                        Say.Builder("For Servicing please press 2").build()
+                    )
+                    .say(
+                        Say.Builder("For Accounts please press 3").build()
+                    )
+                    .action("http://gatherexample.test/select-department")
+                    .numDigits(1)
+                    .build()
+            )
+            .redirect(
+                Redirect.Builder("http://gatherexample.test/request-department").build()
+            )
+            .build()
+
+        // Rewritten using the extensions
+        val actual = voiceResponse {
+            gather {
+                say("For Sales please press 1")
+                say("For Servicing please press 2")
+                say("For Accounts please press 3")
+                action("http://gatherexample.test/select-department")
+                numDigits(1)
+            }
+            redirect("http://gatherexample.test/request-department")
+        }
+
+        println(actual.toXml())
+
+        // compare
+        assertTwimlEquals(expected, actual)
+    }
+
+    @Test
     fun `Gather with conditional message using extensions produces the same TwiML`() {
 
         data class Department(val digit: Int, val name: String)
@@ -45,7 +87,7 @@ internal class GatherTest : TwimlTest() {
                         .build()
                 )
                 .redirect(
-                    Redirect.Builder("http://gatherexample.test/select-department").build()
+                    Redirect.Builder("http://gatherexample.test/request-department").build()
                 )
                 .build()
 
@@ -64,7 +106,7 @@ internal class GatherTest : TwimlTest() {
                     action("http://gatherexample.test/select-department")
                     numDigits(1)
                 }
-                redirect("http://gatherexample.test/select-department")
+                redirect("http://gatherexample.test/request-department")
             }
 
             println(actual.toXml())

@@ -1,5 +1,5 @@
 /**
- * Generated using com.iptiq:twiml-kotlin-code-generation version 9.2.1.0
+ * Generated using com.iptiq:twiml-kotlin-code-generation version 9.2.2.0
  *
  * (C) 2023 iptiQ
  *
@@ -19,6 +19,8 @@ import com.twilio.twiml.voice.Parameter
 import com.twilio.twiml.voice.VirtualAgent
 import com.twilio.twiml.voice.Config
 import com.twilio.twiml.voice.Dial
+import com.twilio.twiml.voice.Application
+import com.twilio.twiml.voice.ApplicationSid
 import com.twilio.twiml.voice.Client
 import com.twilio.twiml.voice.Identity
 import com.twilio.twiml.voice.Conference
@@ -70,6 +72,8 @@ typealias ParameterBlock = Parameter.Builder.() -> Unit
 typealias VirtualAgentBlock = VirtualAgent.Builder.() -> Unit
 typealias ConfigBlock = Config.Builder.() -> Unit
 typealias DialBlock = Dial.Builder.() -> Unit
+typealias ApplicationBlock = Application.Builder.() -> Unit
+typealias ApplicationSidBlock = ApplicationSid.Builder.() -> Unit
 typealias ClientBlock = Client.Builder.() -> Unit
 typealias IdentityBlock = Identity.Builder.() -> Unit
 typealias ConferenceBlock = Conference.Builder.() -> Unit
@@ -395,6 +399,16 @@ fun buildDial(number: String, block: DialBlock = {}): Dial = Dial.Builder(number
 fun Dial.Builder.addChild(tag: String, block: GenericNodeBlock = {}) = this.apply { addChild(buildGenericNode(tag, block)) }
 
 /**
+ * @see com.twilio.twiml.voice.Dial.Builder.application
+ */
+fun Dial.Builder.application(block: ApplicationBlock = {}) = this.apply { application(buildApplication(block)) }
+
+/**
+ * @see com.twilio.twiml.voice.Dial.Builder.application
+ */
+fun Dial.Builder.application(applicationSid: String, block: ApplicationBlock = {}) = this.apply { application(buildApplication(applicationSid, block)) }
+
+/**
  * @see com.twilio.twiml.voice.Dial.Builder.client
  */
 fun Dial.Builder.client(block: ClientBlock = {}) = this.apply { client(buildClient(block)) }
@@ -440,6 +454,46 @@ fun Dial.Builder.sip(sipUrl: String, block: SipBlock = {}) = this.apply { sip(bu
  * @see com.twilio.twiml.voice.Dial.Builder.sip
  */
 fun Dial.Builder.sip(sipUrl: URI, block: SipBlock = {}) = this.apply { sip(buildSip(sipUrl, block)) }
+
+
+/**
+ * Build a [com.twilio.twiml.voice.Application]
+ */
+fun buildApplication(block: ApplicationBlock = {}): Application = Application.Builder().apply(block).build() 
+
+
+/**
+ * Build a [com.twilio.twiml.voice.Application]
+ */
+fun buildApplication(applicationSid: String, block: ApplicationBlock = {}): Application = Application.Builder(applicationSid).apply(block).build() 
+
+/**
+ * @see com.twilio.twiml.TwiML.Builder.addChild
+ */
+fun Application.Builder.addChild(tag: String, block: GenericNodeBlock = {}) = this.apply { addChild(buildGenericNode(tag, block)) }
+
+/**
+ * NOTE: The 'block' parameter is not optional, an attempt to call this function without 'block' would be shadowed by Application.Builder.applicationSid(applicationSid: String)
+ *
+ * @see com.twilio.twiml.voice.Application.Builder.applicationSid
+ */
+fun Application.Builder.applicationSid(sid: String, block: ApplicationSidBlock) = this.apply { applicationSid(buildApplicationSid(sid, block)) }
+
+/**
+ * @see com.twilio.twiml.voice.Application.Builder.parameter
+ */
+fun Application.Builder.parameter(block: ParameterBlock = {}) = this.apply { parameter(buildParameter(block)) }
+
+
+/**
+ * Build a [com.twilio.twiml.voice.ApplicationSid]
+ */
+fun buildApplicationSid(sid: String, block: ApplicationSidBlock = {}): ApplicationSid = ApplicationSid.Builder(sid).apply(block).build() 
+
+/**
+ * @see com.twilio.twiml.TwiML.Builder.addChild
+ */
+fun ApplicationSid.Builder.addChild(tag: String, block: GenericNodeBlock = {}) = this.apply { addChild(buildGenericNode(tag, block)) }
 
 
 /**
@@ -1311,6 +1365,11 @@ fun buildHangup(block: HangupBlock = {}): Hangup = Hangup.Builder().apply(block)
  */
 fun Hangup.Builder.addChild(tag: String, block: GenericNodeBlock = {}) = this.apply { addChild(buildGenericNode(tag, block)) }
 
+/**
+ * @see com.twilio.twiml.voice.Hangup.Builder.parameter
+ */
+fun Hangup.Builder.parameter(block: ParameterBlock = {}) = this.apply { parameter(buildParameter(block)) }
+
 
 /**
  * Build a [com.twilio.twiml.voice.Leave]
@@ -1460,6 +1519,11 @@ fun buildReject(block: RejectBlock = {}): Reject = Reject.Builder().apply(block)
  * @see com.twilio.twiml.TwiML.Builder.addChild
  */
 fun Reject.Builder.addChild(tag: String, block: GenericNodeBlock = {}) = this.apply { addChild(buildGenericNode(tag, block)) }
+
+/**
+ * @see com.twilio.twiml.voice.Reject.Builder.parameter
+ */
+fun Reject.Builder.parameter(block: ParameterBlock = {}) = this.apply { parameter(buildParameter(block)) }
 
 
 /**

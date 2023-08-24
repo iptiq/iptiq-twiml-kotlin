@@ -6,7 +6,7 @@
     <parent>
         <groupId>com.iptiq</groupId>
         <artifactId>twiml-kotlin-parent</artifactId>
-        <version>9.10.0.0</version>
+        <version>9.11.0.0</version>
     </parent>
     <artifactId>twiml-kotlin-extensions</artifactId>
 
@@ -25,7 +25,7 @@
         <connection>scm:git:git://github.com/iptiq/iptiq-twiml-kotlin.git</connection>
         <developerConnection>scm:git:ssh://github.com:iptiq/iptiq-twiml-kotlin.git</developerConnection>
         <url>https://github.com/iptiq/iptiq-twiml-kotlin/tree/main</url>
-        <tag>9.10.0.0</tag>
+        <tag>9.11.0.0</tag>
     </scm>
     <developers>
         <developer>
@@ -36,35 +36,7 @@
     </developers>
 
     <build>
-        <sourceDirectory>src/main/kotlin</sourceDirectory>
-        <testSourceDirectory>src/test/kotlin</testSourceDirectory>
         <plugins>
-            <plugin>
-                <groupId>org.jetbrains.kotlin</groupId>
-                <artifactId>kotlin-maven-plugin</artifactId>
-                <version>${kotlin.version}</version>
-                <configuration>
-                    <!-- See https://kotlinlang.org/docs/compatibility-modes.html -->
-                    <kotlin.compiler.languageVersion>1.3</kotlin.compiler.languageVersion>
-                    <kotlin.compiler.apiVersion>1.3</kotlin.compiler.apiVersion>
-                </configuration>
-                <executions>
-                    <execution>
-                        <id>compile</id>
-                        <phase>compile</phase>
-                        <goals>
-                            <goal>compile</goal>
-                        </goals>
-                    </execution>
-                    <execution>
-                        <id>test-compile</id>
-                        <phase>test-compile</phase>
-                        <goals>
-                            <goal>test-compile</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
             <plugin>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>

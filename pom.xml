@@ -6,7 +6,7 @@
 
     <artifactId>twiml-kotlin-parent</artifactId>
     <groupId>com.iptiq</groupId>
-    <version>9.10.0.0</version>
+    <version>9.11.0.0</version>
     <packaging>pom</packaging>
 
     <name>TwiML Kotlin Parent</name>
@@ -22,7 +22,7 @@
         <connection>scm:git:git://github.com/iptiq/iptiq-twiml-kotlin.git</connection>
         <developerConnection>scm:git:ssh://github.com:iptiq/iptiq-twiml-kotlin.git</developerConnection>
         <url>https://github.com/iptiq/iptiq-twiml-kotlin/tree/main</url>
-        <tag>9.10.0.0</tag>
+        <tag>9.11.0.0</tag>
     </scm>
     <developers>
         <developer>
@@ -33,29 +33,34 @@
     </developers>
 
     <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
-        <twilio.version>9.10.0</twilio.version>
-        <kotlin.version>1.6.21</kotlin.version>
-        <clean.plugin.version>3.2.0</clean.plugin.version>
-        <dokka.plugin.version>1.7.10</dokka.plugin.version>
-        <exec.plugin.version>3.1.0</exec.plugin.version>
-        <failsafe.plugin.version>3.0.0-M7</failsafe.plugin.version>
-        <gpg.plugin.version>3.0.1</gpg.plugin.version>
-        <groovy.plugin.version>2.1.1</groovy.plugin.version>
-        <jacoco.plugin.version>0.8.8</jacoco.plugin.version>
-        <license.plugin.version>2.0.0</license.plugin.version>
-        <nexus.staging.plugin.version>1.6.13</nexus.staging.plugin.version>
-        <source.plugin.version>3.2.1</source.plugin.version>
-        <!-- tests are not running with v2 surefire -->
-        <surefire.plugin.version>3.0.0-M7</surefire.plugin.version>
-        <versions.plugin.version>2.7</versions.plugin.version>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
         <kotlin.code.style>official</kotlin.code.style>
+        <kotlin.compiler.languageVersion>1.6</kotlin.compiler.languageVersion>
+        <kotlin.compiler.apiVersion>1.6</kotlin.compiler.apiVersion>
         <kotlin.compiler.jvmTarget>1.8</kotlin.compiler.jvmTarget>
+
         <license.inceptionYear>2020</license.inceptionYear>
         <license.organizationName>iptiQ</license.organizationName>
         <license.licenseName>mit</license.licenseName>
+
+        <clean.plugin.version>3.3.1</clean.plugin.version>
+        <dokka.plugin.version>1.8.20</dokka.plugin.version>
+        <enforcer.plugin.version>3.4.0</enforcer.plugin.version>
+        <exec.plugin.version>3.1.0</exec.plugin.version>
+        <failsafe.plugin.version>3.1.2</failsafe.plugin.version>
+        <gpg.plugin.version>3.1.0</gpg.plugin.version>
+        <groovy.plugin.version>2.1.1</groovy.plugin.version>
+        <jacoco.plugin.version>0.8.8</jacoco.plugin.version>
+        <kotlin.version>1.9.10</kotlin.version>
+        <license.plugin.version>2.2.0</license.plugin.version>
+        <nexus.staging.plugin.version>1.6.13</nexus.staging.plugin.version>
+        <source.plugin.version>3.3.0</source.plugin.version>
+        <surefire.plugin.version>3.1.2</surefire.plugin.version>
+        <twilio.version>9.11.0</twilio.version>
+        <versions.plugin.version>2.16.0</versions.plugin.version>
     </properties>
 
     <modules>
@@ -64,6 +69,9 @@
     </modules>
 
     <build>
+        <sourceDirectory>src/main/kotlin</sourceDirectory>
+        <testSourceDirectory>src/test/kotlin</testSourceDirectory>
+
         <pluginManagement>
             <plugins>
                 <plugin>
@@ -88,7 +96,29 @@
                 </plugin>
             </plugins>
         </pluginManagement>
+
         <plugins>
+            <plugin>
+                <groupId>org.jetbrains.kotlin</groupId>
+                <artifactId>kotlin-maven-plugin</artifactId>
+                <version>${kotlin.version}</version>
+                <executions>
+                    <execution>
+                        <id>compile</id>
+                        <phase>compile</phase>
+                        <goals>
+                            <goal>compile</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>test-compile</id>
+                        <phase>test-compile</phase>
+                        <goals>
+                            <goal>test-compile</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>license-maven-plugin</artifactId>
@@ -167,6 +197,26 @@
                     <nexusUrl>https://s01.oss.sonatype.org/</nexusUrl>
                     <autoReleaseAfterClose>false</autoReleaseAfterClose>
                 </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-enforcer-plugin</artifactId>
+                <version>${enforcer.plugin.version}</version>
+                <executions>
+                    <execution>
+                        <id>enforce-maven</id>
+                        <goals>
+                            <goal>enforce</goal>
+                        </goals>
+                        <configuration>
+                            <rules>
+                                <requireMavenVersion>
+                                    <version>3.9.4</version>
+                                </requireMavenVersion>
+                            </rules>
+                        </configuration>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>

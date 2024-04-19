@@ -39,14 +39,14 @@ Use the following dependency in Maven
 <dependency>
   <groupId>com.iptiq</groupId>
   <artifactId>twiml-kotlin-extensions</artifactId>
-  <version>10.1.3</version>
+  <version>10.1.5</version>
 </dependency>
 ```
 
 or in Gradle
 
 ```groovy
-implementation 'com.iptiq:twiml-kotlin-extensions:10.1.3'
+implementation 'com.iptiq:twiml-kotlin-extensions:10.1.5'
 ```
 
 Use the following imports in your code

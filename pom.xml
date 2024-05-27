@@ -6,7 +6,7 @@
 
     <artifactId>twiml-kotlin-parent</artifactId>
     <groupId>com.iptiq</groupId>
-    <version>10.1.5</version>
+    <version>10.2.0</version>
     <packaging>pom</packaging>
 
     <name>TwiML Kotlin Parent</name>
@@ -22,7 +22,7 @@
         <connection>scm:git:git://github.com/iptiq/iptiq-twiml-kotlin.git</connection>
         <developerConnection>scm:git:ssh://github.com:iptiq/iptiq-twiml-kotlin.git</developerConnection>
         <url>https://github.com/iptiq/iptiq-twiml-kotlin/tree/main</url>
-        <tag>10.1.5</tag>
+        <tag>10.2.0</tag>
     </scm>
     <developers>
         <developer>
@@ -59,7 +59,7 @@
         <nexus.staging.plugin.version>1.6.13</nexus.staging.plugin.version>
         <source.plugin.version>3.3.0</source.plugin.version>
         <surefire.plugin.version>3.1.2</surefire.plugin.version>
-        <twilio.version>10.1.5</twilio.version>
+        <twilio.version>10.2.0</twilio.version>
         <versions.plugin.version>2.16.0</versions.plugin.version>
     </properties>
 

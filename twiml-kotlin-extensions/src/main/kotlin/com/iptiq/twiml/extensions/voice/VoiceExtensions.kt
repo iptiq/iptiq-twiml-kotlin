@@ -1,5 +1,5 @@
 /**
- * Generated using com.iptiq:twiml-kotlin-code-generation version 10.3.0
+ * Generated using com.iptiq:twiml-kotlin-code-generation version 10.4.0
  *
  * (C) 2024 iptiQ
  *
@@ -57,6 +57,7 @@ import com.twilio.twiml.voice.Reject
 import com.twilio.twiml.voice.Sms
 import com.twilio.twiml.voice.Start
 import com.twilio.twiml.voice.Siprec
+import com.twilio.twiml.voice.Transcription
 import com.twilio.twiml.voice.Stop
 import com.twilio.type.PhoneNumber
 import java.net.URI
@@ -110,6 +111,7 @@ typealias RejectBlock = Reject.Builder.() -> Unit
 typealias SmsBlock = Sms.Builder.() -> Unit
 typealias StartBlock = Start.Builder.() -> Unit
 typealias SiprecBlock = Siprec.Builder.() -> Unit
+typealias TranscriptionBlock = Transcription.Builder.() -> Unit
 typealias StopBlock = Stop.Builder.() -> Unit
 
 
@@ -1557,6 +1559,11 @@ fun Start.Builder.siprec(block: SiprecBlock = {}) = this.apply { siprec(buildSip
  */
 fun Start.Builder.stream(block: StreamBlock = {}) = this.apply { stream(buildStream(block)) }
 
+/**
+ * @see com.twilio.twiml.voice.Start.Builder.transcription
+ */
+fun Start.Builder.transcription(block: TranscriptionBlock = {}) = this.apply { transcription(buildTranscription(block)) }
+
 
 /**
  * Build a [com.twilio.twiml.voice.Siprec]
@@ -1572,6 +1579,27 @@ fun Siprec.Builder.addChild(tag: String, block: GenericNodeBlock = {}) = this.ap
  * @see com.twilio.twiml.voice.Siprec.Builder.parameter
  */
 fun Siprec.Builder.parameter(block: ParameterBlock = {}) = this.apply { parameter(buildParameter(block)) }
+
+
+/**
+ * Build a [com.twilio.twiml.voice.Transcription]
+ */
+fun buildTranscription(block: TranscriptionBlock = {}): Transcription = Transcription.Builder().apply(block).build() 
+
+/**
+ * @see com.twilio.twiml.TwiML.Builder.addChild
+ */
+fun Transcription.Builder.addChild(tag: String, block: GenericNodeBlock = {}) = this.apply { addChild(buildGenericNode(tag, block)) }
+
+/**
+ * @see com.twilio.twiml.voice.Transcription.Builder.config
+ */
+fun Transcription.Builder.config(block: ConfigBlock = {}) = this.apply { config(buildConfig(block)) }
+
+/**
+ * @see com.twilio.twiml.voice.Transcription.Builder.parameter
+ */
+fun Transcription.Builder.parameter(block: ParameterBlock = {}) = this.apply { parameter(buildParameter(block)) }
 
 
 /**
@@ -1593,3 +1621,8 @@ fun Stop.Builder.siprec(block: SiprecBlock = {}) = this.apply { siprec(buildSipr
  * @see com.twilio.twiml.voice.Stop.Builder.stream
  */
 fun Stop.Builder.stream(block: StreamBlock = {}) = this.apply { stream(buildStream(block)) }
+
+/**
+ * @see com.twilio.twiml.voice.Stop.Builder.transcription
+ */
+fun Stop.Builder.transcription(block: TranscriptionBlock = {}) = this.apply { transcription(buildTranscription(block)) }

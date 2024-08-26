@@ -6,7 +6,7 @@
     <parent>
         <groupId>com.iptiq</groupId>
         <artifactId>twiml-kotlin-parent</artifactId>
-        <version>10.4.1</version>
+        <version>10.4.2</version>
     </parent>
     <artifactId>twiml-kotlin-code-generation</artifactId>
 

@@ -1,5 +1,7 @@
 # TwiML Kotlin Extensions
 
+[![Maven Central](https://img.shields.io/maven-central/v/com.iptiq/twiml-kotlin-extensions.svg)](https://search.maven.org/artifact/com.iptiq/twiml-kotlin-extensions)
+
 A Kotlin DSL for TwiML which is both simpler than using the Java SDK's builders and more closely resembles the generated TwiML.
 
 For example, to produce the TwiML
@@ -39,14 +41,14 @@ Use the following dependency in Maven
 <dependency>
   <groupId>com.iptiq</groupId>
   <artifactId>twiml-kotlin-extensions</artifactId>
-  <version>10.4.2</version>
+  <version>10.5.0</version>
 </dependency>
 ```
 
 or in Gradle
 
 ```groovy
-implementation 'com.iptiq:twiml-kotlin-extensions:10.4.2'
+implementation 'com.iptiq:twiml-kotlin-extensions:10.5.0'
 ```
 
 Use the following imports in your code

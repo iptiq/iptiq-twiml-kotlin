@@ -1,5 +1,5 @@
 /**
- * Generated using com.iptiq:twiml-kotlin-code-generation version 10.5.1
+ * Generated using com.iptiq:twiml-kotlin-code-generation version 10.5.2
  *
  * (C) 2024 iptiQ
  *

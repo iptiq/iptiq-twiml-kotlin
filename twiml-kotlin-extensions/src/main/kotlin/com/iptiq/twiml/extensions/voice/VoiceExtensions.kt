@@ -1,7 +1,7 @@
 /**
- * Generated using com.iptiq:twiml-kotlin-code-generation version 10.5.2
+ * Generated using com.iptiq:twiml-kotlin-code-generation version 10.6.7
  *
- * (C) 2024 iptiQ
+ * (C) 2025 iptiQ
  *
  * @author Allan Todd
  */
@@ -10,12 +10,15 @@ package com.iptiq.twiml.extensions.voice
 import com.iptiq.twiml.extensions.shared.*
 import com.twilio.twiml.VoiceResponse
 import com.twilio.twiml.voice.Connect
-import com.twilio.twiml.voice.Autopilot
+import com.twilio.twiml.voice.Assistant
 import com.twilio.twiml.GenericNode
+import com.twilio.twiml.voice.Language
+import com.twilio.twiml.voice.Parameter
+import com.twilio.twiml.voice.Autopilot
 import com.twilio.twiml.voice.Conversation
+import com.twilio.twiml.voice.ConversationRelay
 import com.twilio.twiml.voice.Room
 import com.twilio.twiml.voice.Stream
-import com.twilio.twiml.voice.Parameter
 import com.twilio.twiml.voice.VirtualAgent
 import com.twilio.twiml.voice.Config
 import com.twilio.twiml.voice.Dial
@@ -64,12 +67,15 @@ import java.net.URI
 
 typealias VoiceResponseBlock = VoiceResponse.Builder.() -> Unit
 typealias ConnectBlock = Connect.Builder.() -> Unit
-typealias AutopilotBlock = Autopilot.Builder.() -> Unit
+typealias AssistantBlock = Assistant.Builder.() -> Unit
 typealias GenericNodeBlock = GenericNode.Builder.() -> Unit
+typealias LanguageBlock = Language.Builder.() -> Unit
+typealias ParameterBlock = Parameter.Builder.() -> Unit
+typealias AutopilotBlock = Autopilot.Builder.() -> Unit
 typealias ConversationBlock = Conversation.Builder.() -> Unit
+typealias ConversationRelayBlock = ConversationRelay.Builder.() -> Unit
 typealias RoomBlock = Room.Builder.() -> Unit
 typealias StreamBlock = Stream.Builder.() -> Unit
-typealias ParameterBlock = Parameter.Builder.() -> Unit
 typealias VirtualAgentBlock = VirtualAgent.Builder.() -> Unit
 typealias ConfigBlock = Config.Builder.() -> Unit
 typealias DialBlock = Dial.Builder.() -> Unit
@@ -267,6 +273,11 @@ fun buildConnect(block: ConnectBlock = {}): Connect = Connect.Builder().apply(bl
 fun Connect.Builder.addChild(tag: String, block: GenericNodeBlock = {}) = this.apply { addChild(buildGenericNode(tag, block)) }
 
 /**
+ * @see com.twilio.twiml.voice.Connect.Builder.assistant
+ */
+fun Connect.Builder.assistant(block: AssistantBlock = {}) = this.apply { assistant(buildAssistant(block)) }
+
+/**
  * @see com.twilio.twiml.voice.Connect.Builder.autopilot
  */
 fun Connect.Builder.autopilot(name: String, block: AutopilotBlock = {}) = this.apply { autopilot(buildAutopilot(name, block)) }
@@ -275,6 +286,11 @@ fun Connect.Builder.autopilot(name: String, block: AutopilotBlock = {}) = this.a
  * @see com.twilio.twiml.voice.Connect.Builder.conversation
  */
 fun Connect.Builder.conversation(block: ConversationBlock = {}) = this.apply { conversation(buildConversation(block)) }
+
+/**
+ * @see com.twilio.twiml.voice.Connect.Builder.conversationRelay
+ */
+fun Connect.Builder.conversationRelay(block: ConversationRelayBlock = {}) = this.apply { conversationRelay(buildConversationRelay(block)) }
 
 /**
  * @see com.twilio.twiml.voice.Connect.Builder.room
@@ -290,6 +306,49 @@ fun Connect.Builder.stream(block: StreamBlock = {}) = this.apply { stream(buildS
  * @see com.twilio.twiml.voice.Connect.Builder.virtualAgent
  */
 fun Connect.Builder.virtualAgent(block: VirtualAgentBlock = {}) = this.apply { virtualAgent(buildVirtualAgent(block)) }
+
+
+/**
+ * Build a [com.twilio.twiml.voice.Assistant]
+ */
+fun buildAssistant(block: AssistantBlock = {}): Assistant = Assistant.Builder().apply(block).build() 
+
+/**
+ * @see com.twilio.twiml.TwiML.Builder.addChild
+ */
+fun Assistant.Builder.addChild(tag: String, block: GenericNodeBlock = {}) = this.apply { addChild(buildGenericNode(tag, block)) }
+
+/**
+ * @see com.twilio.twiml.voice.Assistant.Builder.language
+ */
+fun Assistant.Builder.language(block: LanguageBlock = {}) = this.apply { language(buildLanguage(block)) }
+
+/**
+ * @see com.twilio.twiml.voice.Assistant.Builder.parameter
+ */
+fun Assistant.Builder.parameter(block: ParameterBlock = {}) = this.apply { parameter(buildParameter(block)) }
+
+
+/**
+ * Build a [com.twilio.twiml.voice.Language]
+ */
+fun buildLanguage(block: LanguageBlock = {}): Language = Language.Builder().apply(block).build() 
+
+/**
+ * @see com.twilio.twiml.TwiML.Builder.addChild
+ */
+fun Language.Builder.addChild(tag: String, block: GenericNodeBlock = {}) = this.apply { addChild(buildGenericNode(tag, block)) }
+
+
+/**
+ * Build a [com.twilio.twiml.voice.Parameter]
+ */
+fun buildParameter(block: ParameterBlock = {}): Parameter = Parameter.Builder().apply(block).build() 
+
+/**
+ * @see com.twilio.twiml.TwiML.Builder.addChild
+ */
+fun Parameter.Builder.addChild(tag: String, block: GenericNodeBlock = {}) = this.apply { addChild(buildGenericNode(tag, block)) }
 
 
 /**
@@ -312,6 +371,27 @@ fun buildConversation(block: ConversationBlock = {}): Conversation = Conversatio
  * @see com.twilio.twiml.TwiML.Builder.addChild
  */
 fun Conversation.Builder.addChild(tag: String, block: GenericNodeBlock = {}) = this.apply { addChild(buildGenericNode(tag, block)) }
+
+
+/**
+ * Build a [com.twilio.twiml.voice.ConversationRelay]
+ */
+fun buildConversationRelay(block: ConversationRelayBlock = {}): ConversationRelay = ConversationRelay.Builder().apply(block).build() 
+
+/**
+ * @see com.twilio.twiml.TwiML.Builder.addChild
+ */
+fun ConversationRelay.Builder.addChild(tag: String, block: GenericNodeBlock = {}) = this.apply { addChild(buildGenericNode(tag, block)) }
+
+/**
+ * @see com.twilio.twiml.voice.ConversationRelay.Builder.language
+ */
+fun ConversationRelay.Builder.language(block: LanguageBlock = {}) = this.apply { language(buildLanguage(block)) }
+
+/**
+ * @see com.twilio.twiml.voice.ConversationRelay.Builder.parameter
+ */
+fun ConversationRelay.Builder.parameter(block: ParameterBlock = {}) = this.apply { parameter(buildParameter(block)) }
 
 
 /**
@@ -339,17 +419,6 @@ fun Stream.Builder.addChild(tag: String, block: GenericNodeBlock = {}) = this.ap
  * @see com.twilio.twiml.voice.Stream.Builder.parameter
  */
 fun Stream.Builder.parameter(block: ParameterBlock = {}) = this.apply { parameter(buildParameter(block)) }
-
-
-/**
- * Build a [com.twilio.twiml.voice.Parameter]
- */
-fun buildParameter(block: ParameterBlock = {}): Parameter = Parameter.Builder().apply(block).build() 
-
-/**
- * @see com.twilio.twiml.TwiML.Builder.addChild
- */
-fun Parameter.Builder.addChild(tag: String, block: GenericNodeBlock = {}) = this.apply { addChild(buildGenericNode(tag, block)) }
 
 
 /**

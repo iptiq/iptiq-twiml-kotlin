@@ -6,7 +6,7 @@
 
     <artifactId>twiml-kotlin-parent</artifactId>
     <groupId>com.iptiq</groupId>
-    <version>10.6.8</version>
+    <version>10.6.9</version>
     <packaging>pom</packaging>
 
     <name>TwiML Kotlin Parent</name>
@@ -22,7 +22,7 @@
         <connection>scm:git:git://github.com/iptiq/iptiq-twiml-kotlin.git</connection>
         <developerConnection>scm:git:ssh://github.com:iptiq/iptiq-twiml-kotlin.git</developerConnection>
         <url>https://github.com/iptiq/iptiq-twiml-kotlin/tree/main</url>
-        <tag>10.6.8</tag>
+        <tag>10.6.9</tag>
     </scm>
     <developers>
         <developer>
@@ -47,7 +47,7 @@
         <license.organizationName>iptiQ</license.organizationName>
         <license.licenseName>mit</license.licenseName>
 
-        <twilio.version>10.6.8</twilio.version>
+        <twilio.version>10.6.9</twilio.version>
 
         <clean.plugin.version>3.4.0</clean.plugin.version>
         <dokka.plugin.version>1.9.20</dokka.plugin.version>

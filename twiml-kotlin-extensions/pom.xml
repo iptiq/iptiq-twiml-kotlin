@@ -6,7 +6,7 @@
     <parent>
         <groupId>com.iptiq</groupId>
         <artifactId>twiml-kotlin-parent</artifactId>
-        <version>10.6.9</version>
+        <version>10.6.10</version>
     </parent>
     <artifactId>twiml-kotlin-extensions</artifactId>
 
@@ -25,7 +25,7 @@
         <connection>scm:git:git://github.com/iptiq/iptiq-twiml-kotlin.git</connection>
         <developerConnection>scm:git:ssh://github.com:iptiq/iptiq-twiml-kotlin.git</developerConnection>
         <url>https://github.com/iptiq/iptiq-twiml-kotlin/tree/main</url>
-        <tag>10.6.9</tag>
+        <tag>10.6.10</tag>
     </scm>
     <developers>
         <developer>

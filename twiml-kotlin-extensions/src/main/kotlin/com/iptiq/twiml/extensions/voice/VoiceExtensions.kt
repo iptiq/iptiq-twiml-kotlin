@@ -1,5 +1,5 @@
 /**
- * Generated using com.iptiq:twiml-kotlin-code-generation version 10.9.2
+ * Generated using com.iptiq:twiml-kotlin-code-generation version 11.0.0
  *
  * (C) 2025 iptiQ
  *
@@ -31,6 +31,7 @@ import com.twilio.twiml.voice.Number
 import com.twilio.twiml.voice.Queue
 import com.twilio.twiml.voice.Sim
 import com.twilio.twiml.voice.Sip
+import com.twilio.twiml.voice.WhatsApp
 import com.twilio.twiml.voice.Echo
 import com.twilio.twiml.voice.Enqueue
 import com.twilio.twiml.voice.Task
@@ -88,6 +89,7 @@ typealias NumberBlock = Number.Builder.() -> Unit
 typealias QueueBlock = Queue.Builder.() -> Unit
 typealias SimBlock = Sim.Builder.() -> Unit
 typealias SipBlock = Sip.Builder.() -> Unit
+typealias WhatsAppBlock = WhatsApp.Builder.() -> Unit
 typealias EchoBlock = Echo.Builder.() -> Unit
 typealias EnqueueBlock = Enqueue.Builder.() -> Unit
 typealias TaskBlock = Task.Builder.() -> Unit
@@ -526,6 +528,16 @@ fun Dial.Builder.sip(sipUrl: String, block: SipBlock = {}) = this.apply { sip(bu
  */
 fun Dial.Builder.sip(sipUrl: URI, block: SipBlock = {}) = this.apply { sip(buildSip(sipUrl, block)) }
 
+/**
+ * @see com.twilio.twiml.voice.Dial.Builder.whatsApp
+ */
+fun Dial.Builder.whatsApp(phoneNumber: PhoneNumber, block: WhatsAppBlock = {}) = this.apply { whatsApp(buildWhatsApp(phoneNumber, block)) }
+
+/**
+ * @see com.twilio.twiml.voice.Dial.Builder.whatsApp
+ */
+fun Dial.Builder.whatsApp(phoneNumber: String, block: WhatsAppBlock = {}) = this.apply { whatsApp(buildWhatsApp(phoneNumber, block)) }
+
 
 /**
  * Build a [com.twilio.twiml.voice.Application]
@@ -672,6 +684,23 @@ fun buildSip(sipUrl: URI, block: SipBlock = {}): Sip = Sip.Builder(sipUrl).apply
  * @see com.twilio.twiml.TwiML.Builder.addChild
  */
 fun Sip.Builder.addChild(tag: String, block: GenericNodeBlock = {}) = this.apply { addChild(buildGenericNode(tag, block)) }
+
+
+/**
+ * Build a [com.twilio.twiml.voice.WhatsApp]
+ */
+fun buildWhatsApp(phoneNumber: PhoneNumber, block: WhatsAppBlock = {}): WhatsApp = WhatsApp.Builder(phoneNumber).apply(block).build() 
+
+
+/**
+ * Build a [com.twilio.twiml.voice.WhatsApp]
+ */
+fun buildWhatsApp(phoneNumber: String, block: WhatsAppBlock = {}): WhatsApp = WhatsApp.Builder(phoneNumber).apply(block).build() 
+
+/**
+ * @see com.twilio.twiml.TwiML.Builder.addChild
+ */
+fun WhatsApp.Builder.addChild(tag: String, block: GenericNodeBlock = {}) = this.apply { addChild(buildGenericNode(tag, block)) }
 
 
 /**

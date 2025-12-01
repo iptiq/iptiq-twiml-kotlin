@@ -31,7 +31,7 @@ git clone https://github.com/twilio/twilio-java.git
 * Change the version number in ```pom.xml```
 
 ```xml
-<version>11.0.2.WITH_PARAMETERS</version>
+<version>11.1.0.WITH_PARAMETERS</version>
 ```
 
 * Add compiler args to the ```maven-compiler-plugin``` configuration
